@@ -3,6 +3,7 @@ const express = require('express');
 const db = require('./data/db');
 
 const server = express();
+server.use(express.json());
 
 server.listen(3000, () => {
     console.log(' *** listening on 3000 *** ');
@@ -16,7 +17,7 @@ server.post('/api/users', (req, res) => {
     db.insert(userInfo)
         .then(user => {
             if (user) {
-                res.status(201).json({ message: 'User added!', user });
+                res.status(200).json({ message: 'User added!', user });
             } else {
                 res.status(400).json({ message: 'Please provide name and bio for the user' });
             }
