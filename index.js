@@ -79,7 +79,9 @@ server.put('/api/users/:id', (req, res) => {
             if (updated) {
                 res.status(200).json({ success: true, updated });
             } else {
-                res.status(404).json({ message: 'Something went wrong. Double check the ID and info' });
+                res.status(400).json({ message: 'Something went wrong. Double check the ID and info' });
             }
-        })
-})
+        }) .catch(err => {
+            res.status(500).json({ message: 'he user info could not be changed', err });
+        });
+});
